@@ -7,19 +7,120 @@
     <device ID="2094" name="Dummy" protocol="KW2"/>
     <device ID="204B" name="VBC702-AW" protocol="P300"/>
     <device ID="2048" name="VBC702-BW" protocol="P300"/>
-    <device ID="204D" name="Vitotronic 200" protocol="KW2"/>
+    <device ID="204D" name="Vitotronic_200" protocol="KW2"/>
   </devices>
   <commands>
-    <!-- neue Adressen -->
 
+    <!-- added addresses by HABANDY -->
+    <command name="getTempKist" protocmd="getaddr">
+      <addr>0802</addr>
+      <len>2</len>
+      <unit>UT</unit>
+      <error>05 05</error>
+      <description>Ermittle die Kesseltemperatur in Grad C</description>
+      <device ID="2053">
+        <addr>70</addr>
+        <unit>UT1</unit>
+        <len>1</len>
+      </device>
+    </command>
+    <command name="getTempKsoll" protocmd="getaddr">
+      <addr>5502</addr>
+      <len>2</len>
+      <unit>UT</unit>
+      <error>05 05</error>
+      <description>Ermittle die Kesselsolltemperatur in Grad C</description>
+      <device ID="2053">
+        <addr>71</addr>
+        <unit>UT1</unit>
+        <len>1</len>
+      </device>
+    </command>
+    <command name="getTempVListM2" protocmd="getaddr">
+      <addr>080C</addr>
+      <len>2</len>
+      <unit>UT</unit>
+      <description>Ermittle die Vorlauftemperatur M2 in Grad C</description>
+      <device ID="2053">
+        <addr>41</addr>
+        <unit>UT1</unit>
+        <len>1</len>
+      </device>
+    </command>
+    <command name="getBrennerStatus" protocmd="getaddr">
+      <addr>551E</addr>
+      <len>1</len>
+      <unit>RT</unit>
+      <description>Ermittle den Brennerstatus</description>
+      <device ID="2053">
+        <addr>22</addr>
+        <len>1</len>
+        <bit>1</bit>
+        <unit>BST</unit>
+      </device>
+    </command>
+    <command name="getBrennerStarts" protocmd="getaddr">
+      <addr>088A</addr>
+      <len>2</len>
+      <unit>CO</unit>
+      <description>Ermittle die Brennerstarts</description>
+      <device ID="2053"/>
+    </command>
+    <command name="getBrennerStunden1" protocmd="getaddr">
+      <addr>08A7</addr>
+      <len>4</len>
+      <unit>CS</unit>
+      <description>Ermittle die Brennerstunden Stufe 1</description>
+      <device ID="2053" protocmd="geteaddr">
+        <addr>17</addr>
+        <len>2</len>
+        <unit>BH</unit>
+      </device>
+    </command>
+    <command name="getBrennerStunden2" protocmd="getaddr">
+      <addr>08AB</addr>
+      <len>4</len>
+      <unit>CS</unit>
+      <description>Ermittle die Brennerstunden Stufe 2</description>
+      <device ID="2053"/>
+    </command>
+    <command name="getBetriebArtM2" protocmd="getaddr">
+      <addr>3301</addr>
+      <len>1</len>
+      <unit>BA</unit>
+      <description>Betriebsart M2</description>
+      <device ID="2053"/>
+    </command>
+    <command name="getNeigungM2" protocmd="getaddr">
+      <addr>3305</addr>
+      <len>1</len>
+      <unit>UN</unit>
+      <description>Ermittle Neigung Heizkennlinie M2</description>
+      <device ID="2053">
+        <addr>C4</addr>
+        <unit>UN</unit>
+        <len>1</len>
+      </device>
+    </command>
+    <command name="getNiveauM2" protocmd="getaddr">
+      <addr>3304</addr>
+      <len>1</len>
+      <unit>ST</unit>
+      <description>Ermittle Niveau Heizkennlinie M2</description>
+      <device ID="2053">
+        <addr>C5</addr>
+        <unit>ST</unit>
+        <len>1</len>
+      </device>
+    </command>
 
+    <!-- addresses from upstream repo -->
     <command name="getStatusQuellePri1" protocmd="getaddr">
       <description>Ermittle Schaltungen Sekundärquelle</description>
       <addr>0482</addr>
       <len>1</len>
       <unit>RT</unit>
     </command>
-
     <command name="getAnzQuelleSek" protocmd="getaddr">
       <description>Ermittle Schaltungen Sekundärquelle</description>
       <addr>0504</addr>
@@ -110,13 +211,22 @@
       <len>4</len>
       <unit>CO</unit>
     </command>
+
+    <!-- changed by HABANDY -->
     <command name="getTempA" protocmd="getaddr">
-      <addr>0101</addr>
+      <addr>0800</addr>
       <len>2</len>
       <unit>UT</unit>
-      <description>Ermittle die Aussentemperatur in Grad C</description>
+      <error>05 05</error>
+      <description>Ermittle die Aussentemeratur in Grad C</description>
+      <device ID="2053">
+        <addr>6F</addr>
+        <unit>UT1</unit>
+        <len>1</len>
+      </device>
     </command>
-    <!-- WARMWASSER -->
+
+    <!-- from upstream repo -->
     <command name="getTempWWObenIst" protocmd="getaddr">
       <addr>010D</addr>
       <len>2</len>
@@ -130,15 +240,36 @@
       <unit>UT</unit>
       <description>Ermittle die Warmwassertemperatur Unten in Grad C</description>
     </command>
-    <command name="getTempWWsoll" protocmd="getaddr">
-      <addr>6000</addr>
+
+    <!-- changed by HABANDY -->
+    <command name="getTempWWist" protocmd="getaddr">
+      <addr>0804</addr>
       <len>2</len>
       <unit>UT</unit>
-      <description>Ermittle die Warmwassersolltemperatur in Grad C</description>
+      <error>05 05</error>
+      <description>Ermittle die Warmwassertemperatur in Grad C</description>
+      <device ID="2053">
+        <addr>42</addr>
+        <unit>UT1U</unit>
+        <len>1</len>
+      </device>
     </command>
+    <command name="getTempWWsoll" protocmd="getaddr">
+      <addr>6300</addr>
+      <len>1</len>
+      <unit>ST</unit>
+      <description>Ermittle die Warmwassersolltemperatur in Grad C</description>
+      <device ID="2053">
+        <addr>5C</addr>
+        <unit>UT1</unit>
+        <len>1</len>
+      </device>
+    </command>
+
+    <!-- from upstream repo -->
     <!-- set Befehl eingefuegt von ceteris paribus 2010 -->
     <command name="setTempWWsoll" protocmd="setaddr">
-      <addr>6000</addr>
+      <addr>6300</addr>
       <len>2</len>
       <unit>UT</unit>
       <description>Setze die Warmwassersolltemperatur in Grad C</description>
@@ -395,10 +526,11 @@
     <!-- set Befehl eingefuegt von ceteris paribus 20.12.2011 geht noch nicht -->
     <!-- set Befehl Adressen korrigiert von ceteris paribus 13.10.2012 -->
     <!-- Aufruf in vclient ganzzahlig 'setTempRaumNorSollM2 21' -->
+    <!-- changed by HABANDY -->
     <command name="setTempRaumNorSollM2" protocmd="setaddr">
       <addr>3306</addr>
       <len>1</len>
-      <unit>UTI</unit>
+      <unit>ST</unit>
       <description>Setze die Raumsolltemperatur normal M2 in Grad C
       </description>
     </command>
@@ -417,10 +549,11 @@
       <description>Setze die Raumsolltemperatur reduziert M1 in Grad C
       </description>
     </command>
+    <!-- changed by HABANDY -->
     <command name="getTempRaumRedSollM2" protocmd="getaddr">
       <addr>3307</addr>
       <len>1</len>
-      <unit>UTI</unit>
+      <unit>ST</unit>
       <description>Ermittle die Raumsolltemperatur reduziert M2 in Grad C
       </description>
     </command>

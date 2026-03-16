@@ -3,7 +3,7 @@
 	<unix>
 		<config>
 			<serial>
-				<tty>/dev/vitocal</tty>
+				<tty>/dev/ttyUSB0</tty>
 			</serial>
 			<net>
 				<port>3002</port>
@@ -130,9 +130,12 @@
 		<unit name='BetriebsArt'>
 			<abbrev>BA</abbrev>
 			<type>enum</type>
-			<enum bytes='00' text='ABSCHALT'/>
-			<enum bytes='01' text='WW'/>
-			<enum bytes='02' text='HEIZEN+WW'/>
+			<enum bytes='00' text='WW'/>
+			<enum bytes='01' text='RED'/>
+			<enum bytes='02' text='NORM'/>
+                        <enum bytes='03' text='H+WW'/>
+                        <enum bytes='04' text='H+WW'/>
+                        <enum bytes='05' text='ABSCHALT'/>
 			<enum text='UNKNOWN'/>
 		</unit>
 		<unit name='SetReturnStatus'>
@@ -222,6 +225,7 @@
 			<enum bytes='20 98' text='V200KW2 ID=2098 Protokoll:KW'/>
 			<enum bytes='20 CB 03 4A 00 00 01 0A' text='VScotHO1 ID=20CB Protokoll:KW,300'/>
 			<enum bytes='20 94' text='V200KW1 ID=2094 Protokoll:KW'/>
+			<enum bytes='20 4D' text='Vitotronic_200 ID=204D Protokoll:KW2'/>
 			<enum text='UNKNOWN'/>
 		</unit>
 
