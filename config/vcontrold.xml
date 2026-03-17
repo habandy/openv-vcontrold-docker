@@ -3,7 +3,8 @@
 	<unix>
 		<config>
 			<serial>
-				<tty>/dev/ttyUSB0</tty>
+				<!-- dont change this, this is the mapped device! -->
+				<tty>/dev/vitocal</tty>
 			</serial>
 			<net>
 				<port>3002</port>
